@@ -24,12 +24,12 @@ public class RoleService {
     }
 
     public Role deleteRoleById(int id){
-       return this.roleRepository.findRoleById(id)
+       return this.roleRepository.deleteRoleById(id)
                .orElseThrow(() -> new ApiException("Role not found"));
     }
 
     public Role findRoleById(int id){
-        return this.roleRepository.deleteRoleById(id)
+        return this.roleRepository.findRoleById(id)
                 .orElseThrow(() -> new ApiException("Role not found"));
     }
 
