@@ -1,6 +1,6 @@
 package com.OnlineExaminationSystem.App.service;
 
-import com.OnlineExaminationSystem.App.entity.Role;
+import com.OnlineExaminationSystem.App.entity.users.Role;
 import com.OnlineExaminationSystem.App.exceptions.ApiException;
 import com.OnlineExaminationSystem.App.repository.RoleRepository;
 import lombok.AllArgsConstructor;
@@ -15,6 +15,11 @@ public class RoleService {
     private final RoleRepository roleRepository;
 
     public Role addAndUpdateRole(Role role){
+
+        if(role.getId() == 0 && this.roleRepository.findByRole(role.getRole()).isPresent()){
+            throw new ApiException("Duplicate Role");
+        }
+
         this.roleRepository.save(role);
         return role;
     }
@@ -23,9 +28,11 @@ public class RoleService {
         return this.roleRepository.findAll();
     }
 
-    public Role deleteRoleById(int id){
-       return this.roleRepository.deleteRoleById(id)
+    public void deleteRoleById(int id){
+        Role role = this.roleRepository.findRoleById(id)
                .orElseThrow(() -> new ApiException("Role not found"));
+
+        this.roleRepository.deleteById(id);
     }
 
     public Role findRoleById(int id){

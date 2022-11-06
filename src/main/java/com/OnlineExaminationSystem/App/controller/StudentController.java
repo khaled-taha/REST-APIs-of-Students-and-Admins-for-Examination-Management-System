@@ -1,6 +1,6 @@
 package com.OnlineExaminationSystem.App.controller;
 
-import com.OnlineExaminationSystem.App.entity.Student;
+import com.OnlineExaminationSystem.App.entity.users.Student;
 import com.OnlineExaminationSystem.App.service.StudentService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;

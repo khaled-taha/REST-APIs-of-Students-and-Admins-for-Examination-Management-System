@@ -1,7 +1,7 @@
 package com.OnlineExaminationSystem.App.controller;
 
 
-import com.OnlineExaminationSystem.App.entity.Role;
+import com.OnlineExaminationSystem.App.entity.users.Role;
 import com.OnlineExaminationSystem.App.service.RoleService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;

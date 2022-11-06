@@ -1,6 +1,6 @@
 package com.OnlineExaminationSystem.App.service;
 
-import com.OnlineExaminationSystem.App.entity.Admin;
+import com.OnlineExaminationSystem.App.entity.users.Admin;
 import com.OnlineExaminationSystem.App.exceptions.ApiException;
 import com.OnlineExaminationSystem.App.repository.AdminRepository;
 import com.OnlineExaminationSystem.App.repository.UserRepository;
@@ -20,9 +20,13 @@ public class AdminService {
 
     public Admin addAndUpdateAdmin(Admin admin) {
 
-        if (this.userRepository.findUserByEmail(admin.getEmail()).isPresent()) {
-            throw new ApiException("Duplicate Email");
-        }
+        if (admin.getId() == 0) {
+            if(this.userRepository.findUserByEmail(admin.getEmail()).isPresent())
+                    throw new ApiException("Duplicate Email");
+            else if(this.adminRepository.findAdminByUniversityId(admin.getUniversityId()).isPresent())
+                throw new ApiException("Duplicate UniversityId");
+            }
+
         this.adminRepository.save(admin);
 
         return admin;
