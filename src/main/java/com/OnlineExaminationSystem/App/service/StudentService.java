@@ -19,8 +19,11 @@ public class StudentService {
 
     public Student addAndUpdateStudent(Student student) {
 
-        if (this.userRepository.findUserByEmail(student.getEmail()).isPresent()) {
-            throw new ApiException("Duplicate Email");
+        if (student.getId() == 0) {
+            if(this.userRepository.findUserByEmail(student.getEmail()).isPresent())
+                throw new ApiException("Duplicate Email");
+            else if(this.studentRepository.findStudentByUniversityId(student.getUniversityId()).isPresent())
+                throw new ApiException("Duplicate UniversityId");
         }
         this.studentRepository.save(student);
 
